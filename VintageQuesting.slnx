@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="VintageQuesting/VintageQuesting.csproj" />
+  <Project Path="VintageQuestingTest/VintageQuestingTest.csproj" />
+</Solution>

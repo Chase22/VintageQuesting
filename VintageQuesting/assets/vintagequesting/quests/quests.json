@@ -1,0 +1,14 @@
+{
+  "vintagequesting:TestQuest": {
+    "Id": "TestQuest",
+    "Name": "Test Quest",
+    "Description": "This is a test quest.",
+    "Tasks": [
+      {
+        "Type": "Boolean",
+        "Name": "Test Task",
+        "data": "Hello World"
+      }
+    ]
+  }
+}
