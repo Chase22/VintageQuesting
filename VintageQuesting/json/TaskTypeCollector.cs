@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Reflection;
-using System.Text;
 using VintageQuesting.api;
 using Vintagestory.API.Common;
 
@@ -26,6 +25,14 @@ namespace VintageQuesting.json
                             var taskTypeAttr = type.GetCustomAttribute<TaskTypeAttribute>();
                             if (taskTypeAttr != null)
                             {
+                                var typeId = taskTypeAttr.TypeId;
+
+                                // Check for duplicate type IDs
+                                if (map.TryGetValue(typeId, out var conflictingType))
+                                {
+                                    logger.Error($"Task type `{type.FullName}` conflicts with `{conflictingType.FullName}` (both have ID `{typeId}`).");
+                                }
+
                                 map[taskTypeAttr.TypeId] = type;
                             }
                             else
