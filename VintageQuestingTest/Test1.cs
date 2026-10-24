@@ -18,11 +18,17 @@ namespace VintageQuestingTest
     [TaskType("TestTask")]
     internal class TestTask : VintageQuesting.api.Task<String>
     {
-        public string Name
-        {
-            get { return "TestTask"; }
-        }
-        public String data { get; set; }
+        public override string Name {
+            get;
+            set;
+        } = "Whoops! This task has no name!";
+
+        public override String Data {
+            get;
+            set;
+        } = "What data?";
+
+        public override bool Completed => throw new NotImplementedException();
     }
 
     [TestClass]
@@ -57,7 +63,7 @@ namespace VintageQuestingTest
 
             Assert.IsNotNull(quest);
             Assert.AreEqual("Test Quest", quest.Name);
-            Assert.AreEqual("Hello World", ((TestTask)quest.Tasks[0]).data);
+            Assert.AreEqual("Hello World", ((TestTask)quest.Tasks[0]).Data);
         }
     }
 }

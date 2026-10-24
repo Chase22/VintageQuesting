@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 
 namespace VintageQuesting.api
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class TaskTypeAttribute : Attribute
     {
-        public string TypeId { get; }
+        new public string TypeId { get; }
 
         public TaskTypeAttribute(string typeId)
         {
@@ -17,12 +15,13 @@ namespace VintageQuesting.api
 
     public abstract class TaskBase
     {
-        public string Name { get; set; }
+        public abstract string Name { get; set; }
+        
         public abstract bool Completed { get; }
     }
 
     public abstract class Task<T> : TaskBase
     {
-        public T data { get; set; }
+        public abstract T Data { get; set; }
     }
 }
