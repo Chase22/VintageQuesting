@@ -36,6 +36,10 @@ namespace VintageQuesting.json
             if (!_taskTypeMapping.TryGetValue(typeName, out var targetType))
                 throw new JsonException($"Unknown task type: {typeName}");
 
+            // Error type
+            if (targetType == typeof(ErrorTask))
+                return new ErrorTask($"Task of type `{typeName}` failed to load.");
+
             // Deserialize to the correct type without passing a converter to avoid recursion
             return JsonConvert.DeserializeObject(jsObject.ToString(), targetType);
         }
