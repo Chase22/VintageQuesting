@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VintageQuesting.api
 {
@@ -22,6 +23,7 @@ namespace VintageQuesting.api
 
     public abstract class Task<T> : TaskBase
     {
-        public abstract T Data { get; set; }
+        [MaybeNull]
+        public T Data { get; set; }
     }
 }

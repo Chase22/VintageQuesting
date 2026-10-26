@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Nodes;
 using VintageQuesting.api;
 using VintageQuesting.json;
 using Vintagestory.API.Common;
@@ -22,11 +21,6 @@ namespace VintageQuestingTest
             get;
             set;
         } = "Whoops! This task has no name!";
-
-        public override String Data {
-            get;
-            set;
-        } = "What data?";
 
         public override bool Completed => throw new NotImplementedException();
     }
