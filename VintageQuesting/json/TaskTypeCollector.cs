@@ -8,9 +8,9 @@ namespace VintageQuesting.json
 {
     internal static class TaskTypeCollector
     {
-        internal static Dictionary<string, Type> ScanForTaskTypes(ILogger logger)
+        internal static Dictionary<string, Type?> ScanForTaskTypes(ILogger logger)
         {
-            var map = new Dictionary<string, Type>();
+            var map = new Dictionary<string, Type?>();
             var baseType = typeof(TaskBase);
 
             int idCollisionCount = 0;
@@ -32,10 +32,10 @@ namespace VintageQuesting.json
                                 // Check for conflicting type IDs
                                 if (map.TryGetValue(typeId, out var conflictingType))
                                 {
-                                    if (map[typeId] != typeof(ErrorTask))
+                                    if (conflictingType != null)
                                     {
                                         logger.Warning($"Removing task type `{conflictingType.FullName}`, type ID `{typeId}` has conflicts.");
-                                        map[typeId] = typeof(ErrorTask);
+                                        map[typeId] = null;
                                         idCollisionCount++;
                                     }
 
