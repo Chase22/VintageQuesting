@@ -57,7 +57,11 @@ namespace VintageQuestingTest
 
             Assert.IsNotNull(quest);
             Assert.AreEqual("Test Quest", quest.Name);
-            Assert.AreEqual("Hello World", ((TestTask)quest.Tasks[0]).Data);
+
+            var task = quest.Tasks[0];
+
+            Assert.IsNotNull(task);
+            Assert.AreEqual("Hello World", ((TestTask) task).Data);
         }
     }
 }
