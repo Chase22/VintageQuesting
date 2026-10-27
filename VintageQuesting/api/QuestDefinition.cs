@@ -13,7 +13,7 @@ namespace VintageQuesting.api
         public string Name { get; set; }
         public string Description { get; set; }
 
-        public List<TaskBase> Tasks { get; set; }
+        public List<TaskBase?> Tasks { get; set; }
         public List<QuestAction> AcceptActions { get; set; }
         public List<QuestAction> CompleteActions { get; set; }
     }
