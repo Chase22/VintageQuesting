@@ -1,6 +1,5 @@
 ﻿using Newtonsoft.Json;
 using System.Diagnostics.CodeAnalysis;
-using System.Text.Json.Nodes;
 using VintageQuesting.api;
 using VintageQuesting.json;
 using Vintagestory.API.Common;
@@ -18,11 +17,12 @@ namespace VintageQuestingTest
     [TaskType("TestTask")]
     internal class TestTask : VintageQuesting.api.Task<String>
     {
-        public string Name
-        {
-            get { return "TestTask"; }
-        }
-        public String data { get; set; }
+        public override string Name {
+            get;
+            set;
+        } = "Whoops! This task has no name!";
+
+        public override bool Completed => throw new NotImplementedException();
     }
 
     [TestClass]
@@ -57,7 +57,11 @@ namespace VintageQuestingTest
 
             Assert.IsNotNull(quest);
             Assert.AreEqual("Test Quest", quest.Name);
-            Assert.AreEqual("Hello World", ((TestTask)quest.Tasks[0]).data);
+
+            var task = quest.Tasks[0];
+
+            Assert.IsNotNull(task);
+            Assert.AreEqual("Hello World", ((TestTask) task).Data);
         }
     }
 }

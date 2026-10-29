@@ -60,7 +60,14 @@ namespace VintageQuesting
                     sb.AppendLine($"Tasks:");
                     foreach (var task in quest.Tasks)
                     {
-                        sb.AppendLine($"    - {task.Name}");
+                        if (null == task)
+                        {
+                            sb.AppendLine("     - Failed to load task, please review the error log");
+                        }
+                        else
+                        {
+                            sb.AppendLine($"    - {task.Name}");
+                        }
                     }
                     return TextCommandResult.Success(sb.ToString());
                 });
