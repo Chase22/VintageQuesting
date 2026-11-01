@@ -60,7 +60,7 @@ namespace VintageQuesting
                     sb.AppendLine($"Tasks:");
                     foreach (var task in quest.Tasks)
                     {
-                        sb.AppendLine($"    - {task.Name}");
+                        sb.AppendLine($"    - {task.Format()}");
                     }
                     return TextCommandResult.Success(sb.ToString());
                 });
