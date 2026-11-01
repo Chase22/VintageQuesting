@@ -2,20 +2,17 @@
 using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
-using System.Reflection;
-using System.Text;
 using VintageQuesting.api;
-using Vintagestory.API.Common;
 
 namespace VintageQuesting.json
 {
     public class TaskJsonConverter : JsonConverter
     {
-        private readonly Dictionary<string, Type> _taskTypeMapping;
+        private readonly Dictionary<string, Type?> _taskTypeMapping;
 
-        public TaskJsonConverter(IReadOnlyDictionary<string, Type> taskTypeMapping)
+        public TaskJsonConverter(IReadOnlyDictionary<string, Type?> taskTypeMapping)
         {
-            _taskTypeMapping = new Dictionary<string, Type>(taskTypeMapping);
+            _taskTypeMapping = new Dictionary<string, Type?>(taskTypeMapping);
         }
 
         public override bool CanConvert(Type objectType)
@@ -33,8 +30,14 @@ namespace VintageQuesting.json
                 throw new JsonException("Task must have a 'Type' field");
 
             var typeName = typeToken.Value<string>();
+            if (typeName == null)
+                throw new JsonException("Task 'Type' field cannot be null");
+
             if (!_taskTypeMapping.TryGetValue(typeName, out var targetType))
                 throw new JsonException($"Unknown task type: {typeName}");
+
+            // Ignore null (a task ID conflict occurred)
+            if (targetType is null) return null;
 
             // Deserialize to the correct type without passing a converter to avoid recursion
             return JsonConvert.DeserializeObject(jsObject.ToString(), targetType);

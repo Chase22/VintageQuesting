@@ -1,5 +1,5 @@
-﻿using Newtonsoft.Json;
-using Vintagestory.API.Common;
+﻿
+
 
 namespace VintageQuesting.api
 {
@@ -9,8 +9,13 @@ namespace VintageQuesting.api
     /// Data represents the text shown in the task list
     /// </summary>
     [TaskType("Boolean")]
-    public class BooleanTask : NonNullableTask<string>
-    {
+        public override string Name {
+            get;
+            set;
+        } = "Incomplete";
+
+        public bool completed { get; set; }
+        public bool completed { get; set; } = false;
         public bool completed { get; set; } = false;
         public override bool Completed => completed;
 

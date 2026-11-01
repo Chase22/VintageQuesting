@@ -9,7 +9,7 @@ namespace VintageQuesting
     public class VintageQuestingModSystem : ModSystem
     {
         public static string MOD_ID = "vintagequesting";
-        public static AssetCategory questCategory;
+        public static AssetCategory questCategory = null!;
 
         public override void StartPre(ICoreAPI api)
         {

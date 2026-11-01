@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Threading.Tasks;
-using Vintagestory.API.Common;
+using System.Diagnostics.CodeAnalysis;
 
 namespace VintageQuesting.api
 {
     [AttributeUsage(AttributeTargets.Class)]
     public class TaskTypeAttribute : Attribute
     {
-        public string TypeId { get; }
+        new public string TypeId { get; }
 
         public TaskTypeAttribute(string typeId)
         {
@@ -20,6 +19,8 @@ namespace VintageQuesting.api
     /// </summary>
     public abstract class TaskBase
     {
+        public abstract string Name { get; set; }
+        
         public abstract bool Completed { get; }
         
         /// <summary>
@@ -41,7 +42,8 @@ namespace VintageQuesting.api
     /// <typeparam name="T"></typeparam>
     public abstract class Task<T> : TaskBase
     {
-        public T data { get; set; }
+        [MaybeNull]
+        public T Data { get; set; }
     }
 
     /// <summary>

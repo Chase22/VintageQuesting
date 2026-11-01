@@ -1,16 +1,15 @@
 ﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.IO;
-using System.Runtime.CompilerServices;
-using VintageQuesting.json;
 
 namespace VintageQuesting.api
 {
     public class QuestManager
     {   
 
-        private static QuestManager _instance;
+        private static QuestManager? _instance;
         public static QuestManager Instance
         {
             get
@@ -23,6 +22,7 @@ namespace VintageQuesting.api
             }
         }
 
+        [MemberNotNull(nameof(_instance))]
         public static void Initialize(string questJson, JsonSerializer questSerializer)
         {
             if (_instance != null)
@@ -58,7 +58,7 @@ namespace VintageQuesting.api
             throw new KeyNotFoundException($"Quest with ID '{questId}' not found");
         }
 
-        public bool TryGetQuest(string questId, out QuestDefinition quest)
+        public bool TryGetQuest(string questId, [MaybeNullWhen(false)] out QuestDefinition quest)
         {
             return Quests.TryGetValue(questId, out quest);
         }
